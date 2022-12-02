@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Demo_Products_MVC.Models.Product_detail>
+
+@{
+    ViewBag.Title = "ProductDetailListByProductId";
+}
+
+<h2>Selected Product List Details</h2>
+
+
+<table class="table">
+    <tr>      
+        <th>
+           Vendor Name
+        </th>
+        <th>
+            Purchase Date
+        </th>
+        <th>
+            Purchase Price
+        </th>
+        <th>
+            Count
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>       
+        <td>
+            @Html.DisplayFor(modelItem => item.vendor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.purchase_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.purchase_price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_count)
+        </td>        
+    </tr>
+}
+
+</table>
+<div>
+    @Html.ActionLink("Back to List", "ProductList")
+</div>

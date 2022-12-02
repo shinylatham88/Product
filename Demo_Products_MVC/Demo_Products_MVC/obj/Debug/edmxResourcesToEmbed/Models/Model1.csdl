@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DemoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="category_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="Self.FK__Product__categor__267ABA7A" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="product_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="product_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="category_id" Type="Int32" />
+    <Property Name="selling_price" Type="Decimal" Precision="8" Scale="2" />
+    <NavigationProperty Name="Category" Relationship="Self.FK__Product__categor__267ABA7A" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="Product_detail" Relationship="Self.FK__Product_d__produ__2A4B4B5E" FromRole="Product" ToRole="Product_detail" />
+  </EntityType>
+  <EntityType Name="Product_detail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="product_id" Type="Int32" />
+    <Property Name="vendor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="purchase_date" Type="DateTime" Precision="3" />
+    <Property Name="purchase_price" Type="Decimal" Precision="8" Scale="2" />
+    <Property Name="total_count" Type="Decimal" Precision="8" Scale="2" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Product_d__produ__2A4B4B5E" FromRole="Product_detail" ToRole="Product" />
+  </EntityType>
+  <Association Name="FK__Product__categor__267ABA7A">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product_d__produ__2A4B4B5E">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Product_detail" Type="Self.Product_detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Product_detail">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DemoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Product_detail" EntityType="Self.Product_detail" />
+    <AssociationSet Name="FK__Product__categor__267ABA7A" Association="Self.FK__Product__categor__267ABA7A">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product_d__produ__2A4B4B5E" Association="Self.FK__Product_d__produ__2A4B4B5E">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Product_detail" EntitySet="Product_detail" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

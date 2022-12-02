@@ -1,0 +1,33 @@
+ USE [Demo]
+ GO
+ CREATE TABLE Category
+(  
+ id int IDENTITY(1,1) NOT NULL PRIMARY KEY,   
+ category_name nvarchar(50)
+);  
+GO
+
+ USE [Demo]
+ GO
+ CREATE TABLE Product
+(  
+ id int IDENTITY(1,1) NOT NULL PRIMARY KEY,   
+ product_code nvarchar(50),
+ product_name nvarchar(50),
+ category_id int FOREIGN KEY REFERENCES Category(id),
+ selling_price numeric(8,2)
+);  
+GO
+
+USE [Demo]
+GO
+CREATE TABLE Product_detail
+(  
+ id int IDENTITY(1,1) NOT NULL PRIMARY KEY,   
+ product_id int FOREIGN KEY REFERENCES Product(id),
+ vendor nvarchar(50),
+ purchase_date datetime,
+ purchase_price numeric(8,2),
+ total_count numeric(8,2), 
+);  
+GO

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Demo_Products_MVC.Models.Product>
+
+@{
+    ViewBag.Title = "ProductList";
+}
+
+<h2>Product List</h2>
+
+<p>
+    <a href="~/Product/AddProduct" class="button">Add New Product</a>   
+</p>
+<table class="table">
+    <tr>
+        <th>           
+            Product Code
+        </th>
+        <th>
+           Product Name 
+        </th>
+        <th>
+           Category Name 
+        </th>
+        <th>
+          Selling Price 
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.category_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.selling_price)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditProduct", new { id=item.id }, new { @class = "button" }) 
+            @Html.ActionLink("Product Details", "ProductDetailListByProductId", new { id=item.id }, new { @class = "button" })           
+        </td>
+    </tr>
+}
+
+</table>

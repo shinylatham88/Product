@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Demo_Products_MVC.Models.Product_detail>
+
+@{
+    ViewBag.Title = "ProductDetailList";
+}
+
+<h2>Product Detail List</h2>
+
+<p>    
+    <a href="~/Product_Detail/AddProductDetail"  class="button" >Add New Product Detail</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Product Name
+        </th>
+        <th>
+            Vendor Name
+        </th>
+        <th>
+           Purchase Date
+        </th>
+        <th>
+            Purchase Price
+        </th>
+        <th>
+            Count
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.vendor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.purchase_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.purchase_price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_count)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditProductDetail", new { id=item.id }, new { @class = "button" })         
+        </td>
+    </tr>
+}
+
+</table>
